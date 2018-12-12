@@ -2,6 +2,10 @@
 
 use Illuminate\Http\Request;
 
+header('Access-Control-Allow-Origin: *');
+header( 'Access-Control-Allow-Headers: *' );
+header( 'Access-Control-Allow-Methods: *');
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,12 +17,15 @@ use Illuminate\Http\Request;
 |
 */
 
+
+
 Route::resource('article', 'ArticleController');
 Route::resource('user', 'UserController');
-Route::resource('categoria', 'CategoriaController');
+Route::resource('categorias', 'CategoriaController');
 Route::get('/user/{user}/articles', 'UserController@getArticles');
 Route::get('/categoria/{categoria}/articles', 'CategoriaController@getCategoriaArticles');
+//Route::get('/categoria/{categoria}', 'CategoriaController@getCategoriaEspecifica');
 
-Route::get('categoria/{categoria}', 'CategoriaController@show');
+Route::get('/categorias/{categoria}', 'CategoriaController@show');
 Route::get('user/{user}', 'UserController@show');
 Route::get('article/{article}', 'ArticleController@show');

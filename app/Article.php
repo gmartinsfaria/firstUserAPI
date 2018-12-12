@@ -10,7 +10,7 @@ class Article extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'titulo', 'data', 'descricao', 'user_id', 'categoria_id'
+        'titulo', 'data', 'descricao', 'user_id', 'categoria_id', 'artigo_imagem'
     ];
 
 

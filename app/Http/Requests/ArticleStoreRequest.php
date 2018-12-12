@@ -31,7 +31,9 @@ class ArticleStoreRequest extends FormRequest
             'data' => 'required|date',
             'descricao' => 'required|max:300',
             'user_id' => 'required|integer',
-            'categoria_id' => 'required|integer'
+            'categoria_id' => 'required|integer',
+            'artigo_imagem' => 'nullable'
+
         ];
     }
 
@@ -47,7 +49,8 @@ class ArticleStoreRequest extends FormRequest
             'user_id.required' => 'necessario associar um user',
             'user_id.integer' => 'chave estrangeira user tem de ser numerica',
             'categoria_id.required' => 'necessario associar uma categoria',
-            'categoria_id.integer' => 'chave estrangeira categoria tem de ser numerica'
+            'categoria_id.integer' => 'chave estrangeira categoria tem de ser numerica',
+            'artigo_imagem.image' => 'o ficheiro tem de ser do tipo imagem'
         ];
     }
 

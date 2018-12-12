@@ -30,7 +30,9 @@ class ArticleUpdateRequest extends FormRequest
             'data' => 'nullable|date',
             'descricao' => 'nullable|max:300',
             'user_id' => 'nullable|integer',
-            'categoria_id' => 'nullable|integer'
+            'categoria_id' => 'nullable|integer',
+            'artigo_imagem' => 'nullable|image'
+
         ];
     }
 
@@ -40,7 +42,8 @@ class ArticleUpdateRequest extends FormRequest
             'titulo.max' => 'titulo pode ter no maximo 50 caracteres',
             'data.date' => 'tem de utilizar formato data',
             'descricao.max' => 'descricao pode ter no maximo 300 caracteres',
-            'categoria_id.integer' => 'chave estrangeira categoria tem de ser numerica'
+            'categoria_id.integer' => 'chave estrangeira categoria tem de ser numerica',
+            'artigo_imagem.image' => 'o ficheiro tem de ser do tipo imagem'
         ];
     }
 

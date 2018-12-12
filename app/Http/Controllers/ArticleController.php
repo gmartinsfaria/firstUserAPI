@@ -39,7 +39,15 @@ class ArticleController extends Controller
      */
     public function store(ArticleStoreRequest $request)
     {
-        $data = $request->only(['titulo', 'data', 'descricao', 'user_id', 'categoria_id']);
+        $data = $request->only(['titulo', 'data', 'descricao', 'user_id', 'categoria_id', 'artigo_imagem']);
+
+        if(!$path = $request->file('artigo_imagem')){
+            $data['artigo_imagem'] = 'articleImages/predefinido.jpg';
+        }else{
+            $path = $request->file('artigo_imagem')->store('articleImages', 'public');
+            $data['artigo_imagem'] = $path;
+        }
+
 
         $article = \App\Article::create($data);
 
@@ -59,6 +67,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
+
         return $article;
     }
 
@@ -84,7 +93,10 @@ class ArticleController extends Controller
     {
         //$request->only(['titulo', 'data', 'descricao']);
 
-        $data = $request->only(['titulo', 'data', 'descricao', 'user_id', 'categoria_id']);
+        $data = $request->only(['titulo', 'data', 'descricao', 'user_id', 'categoria_id', 'artigo_imagem']);
+
+        $path = $request->file('artigo_imagem')->store('articleImages', 'public');
+        $data['artigo_imagem'] = $path;
 
         if($request->only(['titulo'])){
             $article->titulo = $data['titulo'];
@@ -104,6 +116,10 @@ class ArticleController extends Controller
 
         if($request->only(['categoria_id'])){
             $article->categoria_id = $data['categoria_id'];
+        }
+
+        if($request->file(['artigo_imagem'])){
+            $article->artigo_imagem = $data['artigo_imagem'];
         }
 
         $article->save();

@@ -40,10 +40,19 @@ class UserController extends Controller
      */
     public function store(UserStoreRequest $request) //permite fazer um post
     {
-        $data = $request->only(['name', 'email', 'password']);
+        $data = $request->only(['name', 'email', 'password', 'profile_image']);
+
+        if(!$request->file(['profile_image'])){
+            $data['profile_image'] = 'userImages/predefinido.jpg';
+        }else{
+            $path = $request->file('profile_image')->store('userImages', 'public');
+            $data['profile_image'] = $path;
+        }
+
+
         $data['password'] = bcrypt($data['password']);
 
-        $user = \App\User::create($data);
+        $user = User::create($data);
 
         return response(
             [
@@ -85,7 +94,11 @@ class UserController extends Controller
     public function update(UserUpdateRequest $request, User $user)
     {
         //
-        $data = $request->only(['name', 'email', 'password']);
+        $data = $request->only(['name', 'email', 'password', 'profile_image']);
+
+        $path = $request->file('profile_image')->store('userImages', 'public');
+        $data['profile_image'] = $path;
+
 
         if($request->only(['name'])){
             $user->name = $data['name'];
@@ -97,6 +110,10 @@ class UserController extends Controller
 
         if($request->only(['password'])){
             $user->password = bcrypt($data['password']);
+        }
+
+        if($request->file(['profile_image'])){
+          $user->profile_image = $data['profile_image'];
         }
 
         $user->save();

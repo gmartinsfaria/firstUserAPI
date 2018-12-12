@@ -124,4 +124,15 @@ class CategoriaController extends Controller
                 'msg' => 'ok'
             ],200);
     }
+
+    public function getCategoriaEspecifica(Categoria $categoria) {
+        $data = Categoria::where('categoria', $categoria);
+
+        return response(
+            [
+                'status' => 200,
+                'data' => $data,
+                'msg' => 'ok'
+            ],200);
+    }
 }

@@ -28,7 +28,8 @@ class UserStoreRequest extends FormRequest
         return [
             'email' => 'required|unique:users|email',
             'name' => 'required||unique:users|max:20',
-            'password' => 'required|min:6'
+            'password' => 'required|min:6',
+            'profile_image' => 'nullable|image'
         ];
     }
 
@@ -41,8 +42,8 @@ class UserStoreRequest extends FormRequest
             'name.unique' => 'já existe um utilizador registado com este name',
             'name.max' => 'nome pode ter no maximo 20 caracteres',
             'password.required' => 'password obrigatoria',
-            'password.min' => 'password precisa no mínimo de 6 caracteres'
-
+            'password.min' => 'password precisa no mínimo de 6 caracteres',
+            'profile_image.image' => 'o ficheiro tem de ser do tipo imagem'
         ];
     }
 

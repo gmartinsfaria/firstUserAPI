@@ -28,7 +28,8 @@ class UserUpdateRequest extends FormRequest
         return [
             'email' => 'nullable|unique:users|email',
             'name' => 'nullable||unique:users|max:20',
-            'password' => 'nullable|min:6'
+            'password' => 'nullable|min:6',
+            'profile_image' => 'nullable|image'
         ];
     }
 
@@ -38,8 +39,8 @@ class UserUpdateRequest extends FormRequest
             'email.email' => 'campo email preenchido incorretamente',
             'name.unique' => 'já existe um utilizador registado com este name',
             'name.max' => 'nome pode ter no maximo 20 caracteres',
-            'password.min' => 'password precisa no mínimo de 6 caracteres'
-
+            'password.min' => 'password precisa no mínimo de 6 caracteres',
+            'profile_image.image' => 'o ficheiro tem de ser do tipo imagem'
         ];
     }
 
