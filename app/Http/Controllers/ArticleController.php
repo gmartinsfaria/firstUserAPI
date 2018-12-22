@@ -42,7 +42,7 @@ class ArticleController extends Controller
         $data = $request->only(['titulo', 'data', 'descricao', 'user_id', 'categoria_id', 'artigo_imagem']);
 
         if(!$path = $request->file('artigo_imagem')){
-            $data['artigo_imagem'] = 'articleImages/predefinido.jpg';
+            $data['artigo_imagem'] = 'articleImages/default.jpg';
         }else{
             $path = $request->file('artigo_imagem')->store('articleImages', 'public');
             $data['artigo_imagem'] = $path;
